@@ -136,7 +136,8 @@
 <script>
 (() => {
   const SIZE = 1000;
-  const CX = 500, CY = 500, R = 472;
+  const CX = 500, CY = 500;
+  const RADII = { badge: 500, dark: 472, white: 472 };
 
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
@@ -162,15 +163,17 @@
   let state = { scale: 1, ox: 0, oy: 0 };
 
   function fitScale(img) {
-    return Math.max((2 * R) / img.width, (2 * R) / img.height);
+    const r = RADII[activeStyle];
+    return Math.max((2 * r) / img.width, (2 * r) / img.height);
   }
 
   function render() {
     ctx.clearRect(0, 0, SIZE, SIZE);
+    const r = RADII[activeStyle];
     if (photo) {
       ctx.save();
       ctx.beginPath();
-      ctx.arc(CX, CY, R, 0, Math.PI * 2);
+      ctx.arc(CX, CY, r, 0, Math.PI * 2);
       ctx.clip();
       const s = state.scale * fitScale(photo);
       const w = photo.width * s;
