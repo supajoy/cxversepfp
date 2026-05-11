@@ -129,7 +129,7 @@
 <main>
   <div class="stage" id="stage">
     <canvas id="canvas" width="1000" height="1000"></canvas>
-    <div class="empty" id="empty">upload a photo to begin</div>
+    <div class="empty" id="empty">double-tap to upload a photo</div>
   </div>
 </main>
 
@@ -257,6 +257,8 @@
   };
   stage.addEventListener('pointerup', endDrag);
   stage.addEventListener('pointercancel', endDrag);
+
+  stage.addEventListener('dblclick', () => fileInput.click());
 
   // wheel zoom
   stage.addEventListener('wheel', (e) => {
